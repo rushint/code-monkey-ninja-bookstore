@@ -1,0 +1,202 @@
+$mine-shaft: #3F3F3F;
+$charcoal: #232323;
+$cod-gray: #141414;
+$sunshade: #ffa624;
+$dove-gray: #6e6e6e;
+$bright-red: #b50010;
+$white: #ffffff;
+$alto: #dcdcdc;
+
+@mixin body-view {
+  padding: 0 2rem;
+}
+
+$text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+
+$break-small: 800px;
+
+body, html {
+  width: 100%;
+  height: 100%;
+  background-color: $charcoal;
+  color: $white;
+  padding: 0;
+  margin: 0;
+
+  #app {
+    background-color: $mine-shaft;
+    max-width: 1100px;
+    margin: 0 auto;
+
+    font-family: 'Avenir', Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+
+    .logo {
+        width: 200px;
+    }
+
+    #title {
+      padding: 2rem 0 1rem 2rem;
+      display: flex;
+      align-items: center;
+
+      img {
+        width: 90px;
+        height: 90px;
+        display: inline-block;
+      }
+
+      h1 {
+        display: inline-block;
+        font-family: 'Orbitron', sans-serif;
+        margin: 0;
+        padding: 0 0 0 1rem;
+        font-size: 2.5rem;
+        color: white;
+        text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        user-select: none;
+      }
+
+      @media screen and (max-width: $break-small) {
+        img {
+          width: 50px;
+          height: 50px;
+        }
+
+        h1 {
+          font-size: 1.5rem;
+        }
+      }
+    }
+
+    #day-select {
+      .days {
+        margin: 0;
+        list-style-type: none;
+        cursor: pointer;
+        background: $charcoal;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        width: 100%;
+        padding: 0;
+
+        @media screen and (max-width: $break-small) {
+          justify-content: space-between;
+        }
+
+        .day {
+          display: inline;
+          color: $white;
+          padding: 1rem;
+          user-select: none;
+          font-weight: bold;
+          white-space: nowrap;
+          overflow: hidden;
+
+          &:hover {
+            background-color: lighten($charcoal, 3%);
+          }
+
+          &.active {
+            color: $bright-red;
+            text-decoration: underline;
+            background-color: darken($charcoal, 5%);
+          }
+
+          @media screen and (max-width: $break-small) {
+            display: none;
+            &.active {
+              display: inline;
+            }
+          }
+        }
+
+        .day-selector {
+          display: none;
+
+          @media screen and (max-width: $break-small) {
+            display: inline-flex;
+            justify-content: space-between;
+            width: 80px;
+            color: $white;
+            user-select: none;
+            font-weight: bold;
+            padding: 0;
+            span {
+              width: 40px;
+              font-size: 3rem;
+              position: relative;
+              &:after {
+                position: absolute;
+                left: 5px;
+                bottom: -6px;
+              }
+
+              &:hover {
+                background-color: lighten($charcoal, 3%);
+              }
+            }
+          }
+
+          .dec:after {
+            content: '<';
+          }
+
+          .inc:after {
+            content: '>';
+          }
+
+        }
+      }
+    }
+
+    $filter-shadow: 1px 1px 2px rgba(0,0,0,0.3); 
+  }
+}
+
+
+$tooltip-width-desktop: 9rem;
+$tooltip-width-mobile: 9rem;
+$tooltip-padding: 1rem;
+$arrow-border: 7px;
+
+.tooltip-wrapper {
+  position: relative;
+
+  .tooltip {
+    display: none;
+
+    &.tooltip-show {
+      text-align: center;
+      display: block;
+      position: absolute;
+      left: 50%;
+      top: 0;
+      width: $tooltip-width-desktop;
+      transform: translate(-($tooltip-width-desktop/2 + $tooltip-padding), 50px);
+      background-color: $cod-gray;
+      color: white;
+      padding: $tooltip-padding;
+      z-index: 10;
+
+      @media screen and (max-width: $break-small) {
+        width: $tooltip-width-mobile;
+        transform: translate(-($tooltip-width-mobile/2 + $tooltip-padding), 40px);
+      }
+    }
+
+    &:after {
+      content:'';
+      position: absolute;
+      width: 0;
+      height: 0;
+      border-left: $arrow-border solid transparent;
+      border-right: $arrow-border solid transparent;
+      border-bottom: 10px solid $cod-gray;
+      top: -10px;
+      left: calc(50% - #{$arrow-border});
+    }
+  }
+}
